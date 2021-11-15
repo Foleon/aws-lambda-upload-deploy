@@ -1,4 +1,4 @@
-import * as AWS from 'aws-sdk';
+import * as AWS from "aws-sdk";
 export declare type UploadDeployOptions = {
     functionName: AWS.Lambda.FunctionName;
     handlerName: string;
@@ -18,7 +18,7 @@ export declare type UploadDeployOptions = {
         servicesAllowed?: string[];
         managedPolicies?: string[];
         permissions?: {
-            effect: 'Allow' | 'Deny';
+            effect: "Allow" | "Deny";
             action: string[];
             resource: string[];
         }[];
@@ -33,14 +33,14 @@ export declare type UploadDeployOptions = {
     };
 };
 export declare const AwsLambdaUploadDeploy: ($options: UploadDeployOptions) => {
-    start: ({ assumeYes, noVersioning }?: {
+    start: ({ assumeYes, noVersioning, }?: {
         assumeYes?: boolean;
         noVersioning?: boolean;
     }) => Promise<void | {
         functionName: string;
         bucketName: string;
         cloudformation: {
-            outputs: AWS.CloudFormation.Output[];
+            outputs: AWS.CloudFormation.Outputs;
         };
     }>;
 };

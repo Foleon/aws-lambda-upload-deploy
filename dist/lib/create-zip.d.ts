@@ -1,8 +1,11 @@
-export declare const createZip: ({ input, output }: {
+declare type ZipOptions = {
     input: string;
     output: string;
-}) => Promise<{
+};
+declare type ZipResult = {
     input: string;
     output: string;
     outputSize: number;
-}>;
+};
+export declare const createZip: ({ input, output, }: ZipOptions) => Promise<ZipResult>;
+export {};

@@ -8,7 +8,8 @@
     "declaration": true,
     "target": "es2016",
     "moduleResolution": "Node",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "esModuleInterop": true
   },
   "files": [
     "./src/index.ts"

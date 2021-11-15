@@ -1,24 +1,48 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const archiver = require("archiver");
-const fs = require("fs");
-const zlib = require("zlib");
-exports.createZip = ({ input, output }) => {
+exports.createZip = void 0;
+const archiver_1 = __importDefault(require("archiver"));
+const fs = __importStar(require("fs"));
+const zlib = __importStar(require("zlib"));
+const createZip = ({ input, output, }) => {
     return new Promise((resolve, reject) => {
         const writeStream = fs.createWriteStream(output);
-        const archive = archiver('zip', {
-            zlib: { level: zlib.constants.Z_BEST_COMPRESSION }
+        const archive = (0, archiver_1.default)("zip", {
+            zlib: { level: zlib.constants.Z_BEST_COMPRESSION },
         });
-        writeStream.on('close', () => {
+        writeStream.on("close", () => {
             resolve({
                 input,
                 output,
-                outputSize: archive.pointer()
+                outputSize: archive.pointer(),
             });
         });
-        archive.on('warning', err => reject(err));
+        archive.on("warning", (err) => reject(err));
         archive.pipe(writeStream);
         archive.directory(input, false);
         archive.finalize();
     });
 };
+exports.createZip = createZip;
